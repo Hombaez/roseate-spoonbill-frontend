@@ -5,6 +5,10 @@
   align-items: center;
 }
 
+.LogIn .header {
+  text-align: center;
+}
+
 .LogIn .login_info {
   display: flex;
   flex-direction: row;
@@ -30,4 +34,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.LogIn .input_styling {
+  color: black;
+  border-width: 1px;
+  padding: 10px;
+  text-align: center;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 150px;
+  border-radius: 4px;
 }
