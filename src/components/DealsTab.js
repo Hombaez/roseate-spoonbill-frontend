@@ -1,12 +1,12 @@
 import React from "react";
 
-function DataTab() {
+function DealsTab() {
   return (
     <>
       <p>hi from</p>
-      <p>test</p>
+      <p>DealsTab</p>
     </>
   );
 }
 
-export default DataTab;
+export default DealsTab;

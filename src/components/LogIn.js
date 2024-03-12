@@ -4,7 +4,7 @@ function LogIn() {
   return (
     <>
       <p>hi from</p>
-      <p>test</p>
+      <p>login</p>
     </>
   );
 }

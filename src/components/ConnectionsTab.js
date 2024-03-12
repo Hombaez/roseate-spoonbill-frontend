@@ -4,7 +4,7 @@ function ConnectionsTab() {
   return (
     <>
       <p>hi from</p>
-      <p>test</p>
+      <p>ConnectionsTab</p>
     </>
   );
 }

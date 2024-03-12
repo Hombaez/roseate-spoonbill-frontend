@@ -4,7 +4,7 @@ function Home() {
   return (
     <>
       <p>hi from</p>
-      <p>test</p>
+      <p>home</p>
     </>
   );
 }

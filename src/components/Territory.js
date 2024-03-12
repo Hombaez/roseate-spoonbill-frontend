@@ -1,12 +1,12 @@
 import React from "react";
 
-function Browser() {
+function Territory() {
   return (
     <>
       <p>hi from</p>
-      <p>test</p>
+      <p>Territory</p>
     </>
   );
 }
 
-export default Browser;
+export default Territory;

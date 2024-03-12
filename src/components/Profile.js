@@ -4,7 +4,7 @@ function Profile() {
   return (
     <>
       <p>hi from</p>
-      <p>test</p>
+      <p>Profile</p>
     </>
   );
 }

@@ -1,0 +1,41 @@
+.App {
+  margin-top: -17px;
+}
+
+.App ul {
+  display: flex;
+  margin: 40;
+  background-color: #223375;
+  height: 100px;
+  justify-content: flex-end;
+}
+
+.App .right_side {
+  width: 65%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.App li:hover {
+  text-decoration: underline;
+  color: #ffffff;
+  /* margin-top: 2px; */
+}
+
+.App .links {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 25px;
+}
+
+.App .profile_link {
+  display: flex;
+  align-items: center;
+}
+
+.App #profile_icon {
+  width: 30px;
+  height: 30px;
+  margin-left: 4px;
+}
