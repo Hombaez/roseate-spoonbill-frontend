@@ -1,23 +1,53 @@
 .overview {
   grid-area: overview;
-}
-.upcoming_events {
-  grid-area: connections;
-}
-.events_header {
-  grid-area: events;
+  border-top: solid;
+  border-right: solid;
+  border-left: solid;
+  border-width: 1px;
 }
 .new_connections {
-  grid-area: control;
-}
-.performance {
-  grid-area: performance;
+  grid-area: connections;
+  border-top: solid;
+  border-right: solid;
+  border-left: solid;
+  border-width: 1px;
 }
 
-.Home_Container {
+.performance {
+  grid-area: performance;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.upcoming_events {
+  grid-area: events;
+  border-top: solid;
+  border-right: solid;
+  border-width: 1px;
+}
+.control_center {
+  grid-area: control;
+  border-top: solid;
+  border-right: solid;
+  border-bottom: solid;
+  border-width: 1px;
+}
+
+.Home .Home_Container {
   display: grid;
   grid-template-areas:
     "overview overview overview events events"
     "connections connections connections control control"
-    " performance performance performance control control";
+    "performance performance performance control control";
+}
+
+.Home .header {
+  width: 100%;
+  background-color: #fac70d;
+  border-bottom: solid;
+  border-width: 1px;
+  display: flex;
+  align-items: center;
+  height: 2.5rem;
+  justify-content: center;
 }
