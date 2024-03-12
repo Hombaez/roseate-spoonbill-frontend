@@ -1,0 +1,33 @@
+.LogIn .LogIn_Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.LogIn .login_info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 30rem;
+}
+
+.LogIn .existing_user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.LogIn .line {
+  border-left: 2px solid black;
+  height: 300px;
+}
+
+.LogIn .create_user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
