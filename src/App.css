@@ -20,7 +20,12 @@
 .App li:hover {
   text-decoration: underline;
   color: #ffffff;
-  /* margin-top: 2px; */
+  margin-top: 2px;
+}
+
+.App li:active {
+  text-decoration: underline;
+  color: #ffffff;
 }
 
 .App .links {
@@ -39,3 +44,6 @@
   height: 30px;
   margin-left: 4px;
 }
+
+/* need to add nav bar underline on active page */
+/* google: how to keep underline for nav element on current page */

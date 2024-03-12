@@ -1,0 +1,23 @@
+.overview {
+  grid-area: overview;
+}
+.upcoming_events {
+  grid-area: connections;
+}
+.events_header {
+  grid-area: events;
+}
+.new_connections {
+  grid-area: control;
+}
+.performance {
+  grid-area: performance;
+}
+
+.Home_Container {
+  display: grid;
+  grid-template-areas:
+    "overview overview overview events events"
+    "connections connections connections control control"
+    " performance performance performance control control";
+}

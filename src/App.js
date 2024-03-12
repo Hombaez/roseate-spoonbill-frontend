@@ -44,6 +44,7 @@ function App() {
               src={profile_icon}
               alt="human in a circle with a black background"
               id="profile_icon"
+              // need to change this svg to have a white background
             />
           </li>
         </div>
