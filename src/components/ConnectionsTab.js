@@ -29,7 +29,6 @@ function ConnectionsTab() {
               <h4>pre-approval</h4>
             </div>
           </div>
-          {/* Current working area */}
           <div className="send_message">
             <div className="send_message_title">
               <h3>message with jake johns</h3>
@@ -42,9 +41,19 @@ function ConnectionsTab() {
               <p>send</p>
             </div>
           </div>
-          {/* Current working area */}
         </div>
-        <div className="automessage_container">auto message</div>
+        {/* Current working area */}
+        <div className="automessage_container">
+          <div className="automessage_title">
+            <h3>Auto Message</h3>
+            <p>tog</p>
+          </div>
+          <p>
+            Thank you for connecting. I am Mac Miller with Five Star Mortgage.
+            How Can I help?
+          </p>
+        </div>
+        {/* Current working area */}
       </div>
     </div>
   );
