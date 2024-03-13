@@ -1,0 +1,61 @@
+.important_info {
+  grid-area: info;
+}
+.deals_details {
+  grid-area: details;
+}
+.active_deals {
+  grid-area: active;
+}
+
+.DealsTab .DealsTab_Container {
+  display: grid;
+  grid-template-areas:
+    "details info info info info info"
+    "details active active active active active";
+}
+
+.DealsTab .DealsTab_Container > div {
+  font-size: 30px;
+}
+
+.DealsTab .new_deals {
+  grid-area: new_deals;
+}
+
+.DealsTab .new_deals h2 {
+  background-color: #fac712;
+}
+.DealsTab .expired_deals {
+  grid-area: expired_deals;
+}
+
+.DealsTab .expired_deals h2 {
+  background-color: #fac712;
+}
+
+.DealsTab .closed_deals {
+  grid-area: closed_deals;
+}
+
+.DealsTab .closed_deals h2 {
+  background-color: #fac712;
+}
+
+.DealsTab .deals_details {
+  display: grid;
+  grid-template-areas:
+    "new_deals"
+    "expired_deals"
+    "closed_deals";
+}
+
+.deals_details > div {
+  font-size: 30px;
+}
+
+.DealsTab .important_info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
