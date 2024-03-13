@@ -3,6 +3,7 @@ import "./DealsTab.css";
 import React from "react";
 
 import GreenButton from "./UI/buttons/GreenButton";
+import GreyButton from "./UI/buttons/GreyButton";
 
 function DealsTab() {
   return (
@@ -31,8 +32,24 @@ function DealsTab() {
         <div className="active_deals">
           <h2>Active deals</h2>
           <div className="active_deals_container">
-            <div className="lead_details">john smith</div>
-            <div className="controls">control</div>
+            {/* SUB WOKRING ----------------*/}
+            <div className="lead_details">
+              <p className="last_active">active 2 hours ago</p>
+              <div className="name_image">
+                <p>image</p>
+                <p>John Smith</p>
+              </div>
+              <div className="progress_bar">
+                <p>progress bar</p>
+                <hr />
+              </div>
+              <GreenButton>Chat (!)</GreenButton>
+            </div>
+            {/* SUB WOKRING -----------------*/}
+            <div className="controls">
+              control
+              <GreyButton />
+            </div>
             <div className="liked_props">liked</div>
             <div className="documents">documents</div>
           </div>
