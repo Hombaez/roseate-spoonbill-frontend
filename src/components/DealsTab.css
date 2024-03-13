@@ -96,12 +96,14 @@
   align-items: center;
 }
 
-.DealsTab .controls {
+.DealsTab .controls,
+.DealsTab .liked_props {
   display: flex;
   flex-direction: column;
 }
 
-.DealsTab .controls .controls_title {
+.DealsTab .controls .controls_title,
+.DealsTab .liked_props .liked_title {
   background-color: #c5c3ba;
 }
 
