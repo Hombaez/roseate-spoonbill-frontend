@@ -103,7 +103,8 @@
 }
 
 .DealsTab .controls .controls_title,
-.DealsTab .liked_props .liked_title {
+.DealsTab .liked_props .liked_title,
+.DealsTab .documents .documents_title {
   background-color: #c5c3ba;
 }
 
@@ -113,6 +114,12 @@
 }
 
 .DealsTab .calendar {
+  display: flex;
+  flex-direction: row;
+}
+
+.DealsTab .documents div {
+  /* eventually delete this */
   display: flex;
   flex-direction: row;
 }

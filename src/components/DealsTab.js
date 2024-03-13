@@ -64,7 +64,6 @@ function DealsTab() {
                 <p>(!)</p>
               </div>
             </div>
-            {/* SUB WOKRING -----------------*/}
             <div className="liked_props">
               <div className="liked_title">
                 <h3>liked</h3>
@@ -73,8 +72,24 @@ function DealsTab() {
               <p>345 Capital St</p>
             </div>
             {/* SUB WOKRING -----------------*/}
-
-            <div className="documents">documents</div>
+            <div className="documents">
+              <div className="documents_title">
+                <h3>documents</h3>
+              </div>
+              <div>
+                <p>Tax Return 2023</p> <p>see</p>
+              </div>
+              <div>
+                <p>Proof of Identity</p> <p>see</p>
+              </div>
+              <div>
+                <p>Pre-Approval</p> <p>see</p>
+              </div>
+              <div>
+                <p>Proof of Identity</p> <p>see</p>
+              </div>
+            </div>
+            {/* SUB WOKRING -----------------*/}
           </div>
         </div>
         {/* current work area */}
