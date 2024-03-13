@@ -32,7 +32,6 @@ function DealsTab() {
         <div className="active_deals">
           <h2>Active deals</h2>
           <div className="active_deals_container">
-            {/* SUB WOKRING ----------------*/}
             <div className="lead_details">
               <p className="last_active">active 2 hours ago</p>
               <div className="name_image">
@@ -50,6 +49,7 @@ function DealsTab() {
               control
               <GreyButton />
             </div>
+            {/* SUB WOKRING -----------------*/}
             <div className="liked_props">liked</div>
             <div className="documents">documents</div>
           </div>
