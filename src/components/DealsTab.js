@@ -29,8 +29,13 @@ function DealsTab() {
         </div>
         {/* current work area */}
         <div className="active_deals">
-          <h1>Active deals</h1>
-          <p>hi</p>
+          <h2>Active deals</h2>
+          <div className="active_deals_container">
+            <div className="lead_details">john smith</div>
+            <div className="controls">control</div>
+            <div className="liked_props">liked</div>
+            <div className="documents">documents</div>
+          </div>
         </div>
         {/* current work area */}
       </div>
