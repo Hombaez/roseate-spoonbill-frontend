@@ -1,0 +1,31 @@
+.Territory {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* .Territory .zip_codes {
+  display: flex;
+  flex-direction: column;
+} */
+
+.Territory .your_zip {
+  display: flex;
+  flex-direction: column;
+}
+
+.Territory .your_zip_title,
+.Territory .buy_zip_title {
+  background-color: #fac70d;
+}
+
+.Territory .all_zip_data {
+  display: flex;
+  flex-direction: row;
+}
+
+.Territory .zip_data,
+.Territory .impressions {
+  display: flex;
+  flex-direction: column;
+}
