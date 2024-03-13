@@ -46,8 +46,24 @@ function DealsTab() {
             </div>
             {/* SUB WOKRING -----------------*/}
             <div className="controls">
-              control
-              <GreyButton />
+              <div className="controls_title">
+                <h3>control</h3>
+              </div>
+              <form action="">
+                <select name="process" id="process">
+                  <option value="preapp">Pre Approved</option>
+                  <option value="approval">Approval</option>
+                </select>
+              </form>
+              <GreyButton>Upload Documents</GreyButton>
+              <div className="download_docs">
+                <GreyButton>Download Documents</GreyButton>
+                <p>(!)</p>
+              </div>
+              <div className="calendar">
+                <p>cal</p>
+                <p>(!)</p>
+              </div>
             </div>
             {/* SUB WOKRING -----------------*/}
             <div className="liked_props">liked</div>

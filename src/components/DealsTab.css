@@ -95,3 +95,22 @@
   flex-direction: row;
   align-items: center;
 }
+
+.DealsTab .controls {
+  display: flex;
+  flex-direction: column;
+}
+
+.DealsTab .controls .controls_title {
+  background-color: #c5c3ba;
+}
+
+.DealsTab .download_docs {
+  display: flex;
+  flex-direction: row;
+}
+
+.DealsTab .calendar {
+  display: flex;
+  flex-direction: row;
+}
