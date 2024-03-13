@@ -1,0 +1,39 @@
+.ConnectionsTab {
+  margin: 10px;
+}
+
+.ConnectionsTab .ConnectionsTab_Container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.ConnectionsTab .connections_title {
+  background-color: #fac70d;
+}
+
+.ConnectionsTab .connection_info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 70vw;
+}
+
+.ConnectionsTab .date,
+.ConnectionsTab .name,
+.ConnectionsTab .message,
+.ConnectionsTab .status {
+  display: flex;
+  flex-direction: column;
+}
+
+.ConnectionsTab .send_message_title {
+  text-align: center;
+  background-color: #fac70d;
+}
+
+.ConnectionsTab .text_area {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
