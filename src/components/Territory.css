@@ -18,14 +18,3 @@
 .Territory .buy_zip_title {
   background-color: #fac70d;
 }
-
-.Territory .all_zip_data {
-  display: flex;
-  flex-direction: row;
-}
-
-.Territory .zip_data,
-.Territory .impressions {
-  display: flex;
-  flex-direction: column;
-}
