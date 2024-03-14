@@ -1,0 +1,30 @@
+.accountdetails {
+  grid-area: accountdetails;
+}
+.settings {
+  grid-area: settings;
+}
+.statements {
+  grid-area: statements;
+}
+.payment {
+  grid-area: payment;
+}
+.support {
+  grid-area: support;
+}
+.billing {
+  grid-area: billing;
+}
+
+.Profile {
+  display: grid;
+  grid-template-areas:
+    "accountdetails settings"
+    "statements payment"
+    "support billing";
+}
+
+.Profile > div {
+  font-size: 30px;
+}
