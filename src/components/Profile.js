@@ -55,10 +55,22 @@ function Profile() {
         </div>
         <SecondaryButton>edit profile</SecondaryButton>
       </div>
+      {/* current working area */}
+
       <div className="payment">
         <div className="title">
           <h4>payments</h4>
         </div>
+        <div className="cc_accepted">
+          <p>cc</p>
+          <p>cc</p>
+          <p>cc</p>
+        </div>
+        <div className="payment_info">
+          <p>payment info</p>
+          <p>payment info</p>
+        </div>
+        <SecondaryButton>Manage Payment</SecondaryButton>
       </div>
       {/* current working area */}
 
@@ -69,7 +81,6 @@ function Profile() {
         <SecondaryButton>Message Support</SecondaryButton>
         <SecondaryButton>Email Support</SecondaryButton>
       </div>
-      {/* current working area */}
 
       <div className="billing">
         <div className="title">
