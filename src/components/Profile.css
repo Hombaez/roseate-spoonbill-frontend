@@ -19,13 +19,14 @@
   grid-area: billing;
 }
 
-.Profile {
+.Profile .Profile_Container {
   display: grid;
   grid-template-areas:
     "accountdetails settings"
     "statements payment"
     "support billing";
   gap: 10px;
+  margin: 10px;
   height: 100%;
 }
 
