@@ -39,10 +39,6 @@
     "details active active active active active";
 }
 
-.DealsTab .DealsTab_Container > div {
-  font-size: 30px;
-}
-
 .DealsTab .new_deals {
   grid-area: new_deals;
 }
