@@ -5,7 +5,7 @@ import "./GreenButton.css";
 function GreenButton(props) {
   return (
     <>
-      <button class="green_button">{props.children}</button>
+      <button className="green_button">{props.children}</button>
     </>
   );
 }

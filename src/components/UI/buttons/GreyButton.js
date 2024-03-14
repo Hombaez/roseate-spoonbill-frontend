@@ -5,7 +5,7 @@ import "./GreyButton.css";
 function GreyButton(props) {
   return (
     <>
-      <button class="grey_button">{props.children}</button>
+      <button className="grey_button">{props.children}</button>
     </>
   );
 }

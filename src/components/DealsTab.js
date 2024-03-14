@@ -1,11 +1,20 @@
 import "./DealsTab.css";
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import GreenButton from "./UI/buttons/GreenButton";
 import GreyButton from "./UI/buttons/GreyButton";
 
 function DealsTab() {
+  const navigate = useNavigate();
+
+  const sendMessage = () => {
+    // Navigate to ConnectionsTab.js
+    navigate("/connections");
+    console.log("going to send message");
+  };
+
   return (
     <div className="DealsTab">
       <div className="DealsTab_Container">
@@ -28,7 +37,6 @@ function DealsTab() {
           <h4>5 New Messages</h4>
           <h4>1 Upcoming Dates</h4>
         </div>
-        {/* current work area */}
         <div className="active_deals">
           <h2>Active deals</h2>
           <div className="active_deals_container">
@@ -42,7 +50,7 @@ function DealsTab() {
                 <p>progress bar</p>
                 <hr />
               </div>
-              <GreenButton>Chat (!)</GreenButton>
+              <GreenButton onClick={sendMessage}>Chat (!)</GreenButton>
             </div>
             <div className="controls">
               <div className="controls_title">

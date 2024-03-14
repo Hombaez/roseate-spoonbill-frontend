@@ -5,7 +5,7 @@ import "./PrimaryButton.css";
 function PrimaryButton(props) {
   return (
     <>
-      <button class="primary_button">{props.children}</button>
+      <button className="primary_button">{props.children}</button>
     </>
   );
 }
