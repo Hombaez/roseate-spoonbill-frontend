@@ -1,19 +1,21 @@
-.accountdetails {
+.Profile .accountdetails {
   grid-area: accountdetails;
+  display: flex;
+  flex-direction: column;
 }
-.settings {
+.Profile .settings {
   grid-area: settings;
 }
-.statements {
+.Profile .statements {
   grid-area: statements;
 }
-.payment {
+.Profile .payment {
   grid-area: payment;
 }
-.support {
+.Profile .support {
   grid-area: support;
 }
-.billing {
+.Profile .billing {
   grid-area: billing;
 }
 
@@ -23,8 +25,27 @@
     "accountdetails settings"
     "statements payment"
     "support billing";
+  gap: 10px;
 }
 
 .Profile > div {
   font-size: 30px;
+}
+
+.Profile .title {
+  background-color: #fac70d;
+}
+.Profile .accountdetails_container {
+  display: flex;
+  flex-direction: row;
+}
+
+.Profile .profile_details {
+  display: flex;
+  flex-direction: column;
+}
+
+.Profile .info {
+  display: flex;
+  flex-direction: row;
 }
