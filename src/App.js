@@ -1,65 +1,111 @@
 import "./App.css";
-import { Route, Routes, Link } from "react-router-dom";
-
+import { Route, Routes, Link, Navigate, useLocation } from "react-router-dom";
 import LogIn from "./components/LogIn";
 import Home from "./components/Home";
 import DealsTab from "./components/DealsTab";
 import ConnectionTab from "./components/ConnectionsTab";
 import Territory from "./components/Territory";
 import Profile from "./components/Profile";
-
-import profile_icon from "../src/images/profile_icon.png";
+import { isAuthenticated } from "./components/Utils/auth";
 
 function App() {
+  const location = useLocation();
+
   return (
     <div className="App">
-      {/* write code for if person is logged in or not to change what the nav bar looks like */}
-      <ul>
-        <div className="right_side">
-          <li>
-            <Link className="links" to="/home">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link className="links" to="/deals">
-              Deals
-            </Link>
-          </li>
-          <li>
-            <Link className="links" to="/connections">
-              Connections
-            </Link>
-          </li>
-          <li>
-            <Link className="links" to="/territory">
-              Territory
-            </Link>
-          </li>
-          <li className="profile_link">
-            <Link className="links" to="/profile">
-              Profile
-            </Link>
-            <img
-              src={profile_icon}
-              alt="human in a circle with a black background"
-              id="profile_icon"
-              // need to change this svg to have a white background
-            />
-          </li>
-        </div>
-      </ul>
+      <nav>
+        <ul>
+          <div className="right_side">
+            <li>
+              <Link
+                className={`links ${location.pathname === "/" ? "active" : ""}`}
+                to="/"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                className={`links ${
+                  location.pathname === "/deals" ? "active" : ""
+                }`}
+                to="/deals"
+              >
+                Deals
+              </Link>
+            </li>
+            <li>
+              <Link
+                className={`links ${
+                  location.pathname === "/connections" ? "active" : ""
+                }`}
+                to="/connections"
+              >
+                Connections
+              </Link>
+            </li>
+            <li>
+              <Link
+                className={`links ${
+                  location.pathname === "/territory" ? "active" : ""
+                }`}
+                to="/territory"
+              >
+                Territory
+              </Link>
+            </li>
+            <li className="profile_link">
+              <Link
+                className={`links ${
+                  location.pathname === "/profile" ? "active" : ""
+                }`}
+                to="/profile"
+              >
+                Profile
+              </Link>
+            </li>
+          </div>
+        </ul>
+      </nav>
 
       <Routes>
-        <Route path="/" element={<LogIn />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/deals" element={<DealsTab />} />
-        <Route path="/connections" element={<ConnectionTab />} />
-        <Route path="/territory" element={<Territory />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/login" element={<LogIn />} />
+        <Route
+          path="/"
+          element={<Home />}
+          // element={<PrivateRoute component={Home} />}
+        />
+        <Route
+          path="/deals"
+          element={<DealsTab />}
+          // element={<PrivateRoute component={DealsTab} />}
+        />
+        <Route
+          path="/connections"
+          element={<ConnectionTab />}
+
+          // element={<PrivateRoute component={ConnectionTab} />}
+        />
+        <Route
+          path="/territory"
+          element={<Territory />}
+          // element={<PrivateRoute component={Territory} />}
+        />
+        <Route
+          path="/profile"
+          element={<Profile />}
+          // element={<PrivateRoute component={Profile} />}
+        />
       </Routes>
     </div>
   );
 }
+
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  if (!isAuthenticated()) {
+    return <Navigate to="/login" />;
+  }
+  return <Route {...rest} element={<Component />} />;
+};
 
 export default App;

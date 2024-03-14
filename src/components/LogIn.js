@@ -1,10 +1,27 @@
-import "./LogIn.css";
+import React, { useState } from "react";
+import axios from "axios";
 
-import React from "react";
+import "./LogIn.css";
 
 import PrimaryButton from "./UI/buttons/PrimaryButton";
 
 function LogIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("/auth/login", { email, password });
+      // Handle successful login (e.g., store token in local storage, redirect)
+      console.log("Login successful:", response.data);
+    } catch (error) {
+      // Handle login error
+      console.error("Login error:", error);
+    }
+  };
+
   return (
     <div className="LogIn">
       <div className="LogIn_Container">
@@ -22,18 +39,21 @@ function LogIn() {
               className="existing_user"
             >
               <input
-                type="text"
+                className="input_styling"
+                type="email"
                 name="email"
                 placeholder="Email"
-                className="input_styling"
+                value={email}
               />
               <input
+                className="input_styling"
                 type="password"
                 name="password"
                 placeholder="Password"
-                className="input_styling"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
-              <PrimaryButton>Log in</PrimaryButton>
+              <PrimaryButton type="submit">Log in</PrimaryButton>
             </form>
             <a>forgot password?</a>
           </div>

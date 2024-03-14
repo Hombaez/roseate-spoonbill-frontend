@@ -45,5 +45,9 @@
   margin-left: 4px;
 }
 
+.App .links.active {
+  text-decoration: underline;
+}
+
 /* need to add nav bar underline on active page */
 /* google: how to keep underline for nav element on current page */
