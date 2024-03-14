@@ -45,7 +45,6 @@ function Profile() {
           <SecondaryButton className="button">Privacy</SecondaryButton>
         </div>
       </div>
-      {/* current working area */}
       <div className="statements">
         <div className="title">
           <h4>statements</h4>
@@ -56,18 +55,22 @@ function Profile() {
         </div>
         <SecondaryButton>edit profile</SecondaryButton>
       </div>
-      {/* current working area */}
-
       <div className="payment">
         <div className="title">
           <h4>payments</h4>
         </div>
       </div>
+      {/* current working area */}
+
       <div className="support">
         <div className="title">
           <h4>support</h4>
         </div>
+        <SecondaryButton>Message Support</SecondaryButton>
+        <SecondaryButton>Email Support</SecondaryButton>
       </div>
+      {/* current working area */}
+
       <div className="billing">
         <div className="title">
           <h4>billing</h4>
