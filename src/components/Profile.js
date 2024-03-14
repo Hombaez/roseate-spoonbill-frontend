@@ -1,10 +1,11 @@
 import "./Profile.css";
 import React from "react";
 
+import SecondaryButton from "../components/UI/buttons/SecondaryButton";
+
 function Profile() {
   return (
     <div className="Profile">
-      {/* current working area */}
       <div className="accountdetails">
         <div className="title">
           <h4>Your Profile</h4>
@@ -22,7 +23,10 @@ function Profile() {
             </div>
             <div className="bio">type yourbio here</div>
           </div>
-          <div className="button">button</div>
+          <div className="profile_button">
+            {" "}
+            <SecondaryButton className="button">edit profile</SecondaryButton>
+          </div>
         </div>
       </div>
       {/* current working area */}
@@ -30,7 +34,20 @@ function Profile() {
         <div className="title">
           <h4>settings</h4>
         </div>
+        <div className="button_container">
+          <SecondaryButton className="button">Notifications</SecondaryButton>
+          <SecondaryButton className="button">Connect Calendar</SecondaryButton>
+          <SecondaryButton className="button">
+            Connect Social Media
+          </SecondaryButton>
+          <SecondaryButton className="button">
+            License Information
+          </SecondaryButton>
+          <SecondaryButton className="button">Change Password</SecondaryButton>
+          <SecondaryButton className="button">Privacy</SecondaryButton>
+        </div>
       </div>
+      {/* current working area */}
       <div className="statements">
         <div className="title">
           <h4>statements</h4>
