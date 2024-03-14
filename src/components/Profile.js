@@ -24,12 +24,10 @@ function Profile() {
             <div className="bio">type yourbio here</div>
           </div>
           <div className="profile_button">
-            {" "}
-            <SecondaryButton className="button">edit profile</SecondaryButton>
+            <SecondaryButton>edit profile</SecondaryButton>
           </div>
         </div>
       </div>
-      {/* current working area */}
       <div className="settings">
         <div className="title">
           <h4>settings</h4>
@@ -52,7 +50,14 @@ function Profile() {
         <div className="title">
           <h4>statements</h4>
         </div>
+        <div className="statement_details">
+          <p>August 2023</p>
+          <p>eye</p>
+        </div>
+        <SecondaryButton>edit profile</SecondaryButton>
       </div>
+      {/* current working area */}
+
       <div className="payment">
         <div className="title">
           <h4>payments</h4>
