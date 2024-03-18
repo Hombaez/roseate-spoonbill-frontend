@@ -4,6 +4,10 @@ import React from "react";
 import SecondaryButton from "../components/UI/buttons/SecondaryButton";
 
 function Profile() {
+  const handleEmailClick = () => {
+    window.location.href = "mailto:support@hombaez.com";
+  };
+
   return (
     <div className="Profile">
       <div className="Profile_Container">
@@ -81,7 +85,9 @@ function Profile() {
             <h4>support</h4>
           </div>
           <SecondaryButton>Message Support</SecondaryButton>
-          <SecondaryButton>Email Support</SecondaryButton>
+          <div onClick={handleEmailClick}>
+            <SecondaryButton>Email Support</SecondaryButton>
+          </div>
         </div>
         <div className="billing">
           <div className="title">
