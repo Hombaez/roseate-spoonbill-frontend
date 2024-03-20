@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes, Link, Navigate, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import LogIn from "./components/LogIn";
 import Home from "./components/Home";
 import DealsTab from "./components/DealsTab";
@@ -9,10 +9,14 @@ import Territory from "./components/Territory";
 import Profile from "./components/Profile";
 
 import Register from "./components/Register";
+import Header from "./components/Header";
+import { UserContext } from "./context/UserContext";
+import Signin from "./components/Signin";
 
 // import { isAuthenticated } from "./components/Utils/auth";
 
 function App() {
+  const [token] = useContext(UserContext);
   const location = useLocation();
 
   return (
@@ -68,12 +72,33 @@ function App() {
                 Profile
               </Link>
             </li>
+            <li>
+              <Header />
+            </li>
           </div>
         </ul>
       </nav>
 
+      {token ? (
+        <div>
+          <h1>woo! logged in</h1>
+        </div>
+      ) : (
+        <div>
+          <h1>you are NOTTTTT logged in</h1>
+        </div>
+      )}
+
       <Routes>
-        <Route path="/login" element={<Register />} />
+        <Route
+          path="/login"
+          element={
+            <>
+              <Signin /> <Register />
+            </>
+          }
+        />
+
         <Route
           path="/"
           element={<Home />}

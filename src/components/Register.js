@@ -6,7 +6,7 @@ import ErrorMessage from "./ErrorMessage";
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [confirmationPassword, setConfirmationPassword] = useState("");
+  const [confirmationPassword, setConfirmationPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [, setToken] = useContext(UserContext);
 
@@ -56,8 +56,7 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (password === confirmationPassword && password.length > 5) {
-    if (password.length > 2) {
+    if (password === confirmationPassword && password.length > 2) {
       submitRegistration();
     } else {
       setErrorMessage(
@@ -87,14 +86,14 @@ const Register = () => {
           onChange={(e) => setPassword(e.target.value)}
           className="input_styling"
         />
-        {/* <input
+        <input
           type="password"
           //   name="verify_password"
           placeholder="Confirm password"
           value={confirmationPassword}
           onChange={(e) => setConfirmationPassword(e.target.value)}
           className="input_styling"
-        /> */}
+        />
         <ErrorMessage message={errorMessage} />
         <button type="submit">Create User</button>
       </form>
