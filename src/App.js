@@ -10,7 +10,7 @@ import Profile from "./components/Profile";
 
 import Register from "./components/Register";
 
-import { isAuthenticated } from "./components/Utils/auth";
+// import { isAuthenticated } from "./components/Utils/auth";
 
 function App() {
   const location = useLocation();
@@ -104,11 +104,11 @@ function App() {
   );
 }
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  if (!isAuthenticated()) {
-    return <Navigate to="/login" />;
-  }
-  return <Route {...rest} element={<Component />} />;
-};
+// const PrivateRoute = ({ component: Component, ...rest }) => {
+//   if (!isAuthenticated()) {
+//     return <Navigate to="/login" />;
+//   }
+//   return <Route {...rest} element={<Component />} />;
+// };
 
 export default App;

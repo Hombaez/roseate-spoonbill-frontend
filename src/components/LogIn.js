@@ -9,18 +9,18 @@ function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    try {
-      const response = await axios.post("/auth/login", { email, password });
-      // Handle successful login (e.g., store token in local storage, redirect)
-      console.log("Login successful:", response.data);
-    } catch (error) {
-      // Handle login error
-      console.error("Login error:", error);
-    }
-  };
+  //   try {
+  //     const response = await axios.post("/auth/login", { email, password });
+  //     // Handle successful login (e.g., store token in local storage, redirect)
+  //     console.log("Login successful:", response.data);
+  //   } catch (error) {
+  //     // Handle login error
+  //     console.error("Login error:", error);
+  //   }
+  // };
 
   return (
     <div className="LogIn">

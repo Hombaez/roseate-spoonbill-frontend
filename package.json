@@ -37,6 +37,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "https://aspen-backend-ca1ab990a9c5.herokuapp.com"
+  }
 }

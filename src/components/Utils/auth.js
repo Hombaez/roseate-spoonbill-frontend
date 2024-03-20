@@ -1,6 +1,6 @@
-export const isAuthenticated = () => {
-  // check if the user's authentication token is present
-  const authToken = localStorage.getItem("authToken");
-  return authToken !== null;
-  // Return true if user is authenticated, if not- false
-};
+// export const isAuthenticated = () => {
+//   // check if the user's authentication token is present
+//   const authToken = localStorage.getItem("authToken");
+//   return authToken !== null;
+//   // Return true if user is authenticated, if not- false
+// };

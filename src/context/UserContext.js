@@ -11,22 +11,19 @@ export const UserProvider = (props) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "bearer " + token,
+          Authorization: "Bearer " + token,
         },
       };
-      try {
-        const response = await fetch(
-          "https://aspen-backend-ca1ab990a9c5.herokuapp.com/users/me",
-          requestOptions
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch user");
-        }
-        localStorage.setItem("hubToken", token);
-      } catch (error) {
-        console.error("There be an error, send help:", error);
+
+      const response = await fetch(
+        "https://aspen-backend-ca1ab990a9c5.herokuapp.com/users/me",
+        requestOptions
+      );
+
+      if (!response.ok) {
         setToken(null);
       }
+      localStorage.setItem("hubToken", token);
     };
     fetchUser();
   }, [token]);
