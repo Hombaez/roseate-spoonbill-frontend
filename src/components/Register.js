@@ -33,16 +33,16 @@ const Register = () => {
         state: "string",
         zip: "string",
         description: "string",
-        statements: ["string"],
-        territories: ["string"],
+        statements: [],
+        territories: [],
       }),
     };
 
     const response = await fetch(
       "https://aspen-backend-ca1ab990a9c5.herokuapp.com/auth/register",
-      requestOptions,
-      console.log("fetch req sent")
+      requestOptions
     );
+
     const data = await response.json();
 
     if (!response.ok) {
