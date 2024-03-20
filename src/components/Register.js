@@ -33,8 +33,6 @@ const Register = () => {
         state: "string",
         zip: "string",
         description: "string",
-        statements: ["string"],
-        territories: ["string"],
       }),
     };
 
