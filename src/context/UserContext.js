@@ -21,23 +21,35 @@ export const UserProvider = (props) => {
         },
       };
 
-      const response = await fetch(
-        "https://aspen-backend-ca1ab990a9c5.herokuapp.com/users/me",
-        requestOptions
-      );
+      try {
+        const response = await fetch(
+          "https://aspen-backend-ca1ab990a9c5.herokuapp.com/users/me",
+          requestOptions
+        );
 
-      if (!response.ok) {
-        console.log("response is not okay");
-        setToken(null);
-      } else {
+        if (!response.ok) {
+          console.log("Response is not okay:", response.status);
+          throw new Error("Failed to fetch user data");
+        }
+
         const responseData = await response.json();
-        const newToken = responseData.token; // Assuming the token is returned from the server
+
+        if (!responseData.access_token) {
+          console.log("No access token found in response:", responseData);
+          throw new Error("Access token not found in response");
+        }
+
+        const newToken = responseData.access_token;
         setToken(newToken);
         localStorage.setItem("hubToken", newToken);
-        console.log("token", newToken);
+        console.log("Token:", newToken);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+        setToken(null);
       }
       setIsLoading(false);
     };
+
     fetchUser();
   }, [token]);
 
