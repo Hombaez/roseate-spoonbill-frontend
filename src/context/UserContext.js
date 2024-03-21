@@ -3,7 +3,7 @@ import { React, createContext, useState, useEffect } from "react";
 export const UserContext = createContext();
 
 export const UserProvider = (props) => {
-  const [token, setToken] = useState(localStorage.getItem("hubToken"));
+  const [token, setToken] = useState(localStorage.getItem("accessToken"));
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

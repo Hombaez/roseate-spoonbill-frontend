@@ -72,15 +72,7 @@ const Signin = () => {
         <ErrorMessage message={errorMessage} />
         <button type="submit">Log In</button>
       </form>
-      {token ? (
-        <div>
-          <h1>woo! logged in</h1>
-        </div>
-      ) : (
-        <div>
-          <h1>you are NOTTTTT logged in</h1>
-        </div>
-      )}
+      {!token ? null : <div>Logged in</div>}
     </div>
   );
 };
