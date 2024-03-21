@@ -15,10 +15,10 @@ const Signin = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(`{
-                "email": ${email},
-                "password": ${password}
-              }`),
+      body: JSON.stringify({
+        email: `${email}`,
+        password: `${password}`,
+      }),
     };
 
     const response = await fetch(
@@ -30,6 +30,8 @@ const Signin = () => {
     if (!response.ok) {
       setErrorMessage(data.detail);
     } else {
+      const data = await response.json();
+
       setToken(data.access_token);
     }
   };
