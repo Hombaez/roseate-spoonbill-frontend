@@ -13,17 +13,17 @@ const Signin = () => {
     const requestOptions = {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
       },
       body: JSON.stringify({
-        email: email,
+        username: email,
         password: password,
       }),
     };
 
     try {
       const response = await fetch(
-        "https://aspen-backend-ca1ab990a9c5.herokuapp.com/auth/request-verify-token",
+        "https://aspen-backend-ca1ab990a9c5.herokuapp.com/auth/jwt/login",
         requestOptions
       );
 
