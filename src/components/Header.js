@@ -12,11 +12,7 @@ const Header = ({ title }) => {
   return (
     <div>
       <h1>{title}</h1>
-      {token ? (
-        <button onClick={handleLogout}>log out</button>
-      ) : (
-        <button>log in</button>
-      )}{" "}
+      {token && <button onClick={handleLogout}>log out</button>}
     </div>
   );
 };
