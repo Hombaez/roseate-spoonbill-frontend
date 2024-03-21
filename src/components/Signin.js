@@ -16,24 +16,31 @@ const Signin = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: `${email}`,
-        password: `${password}`,
+        email: email,
+        password: password,
       }),
     };
 
-    const response = await fetch(
-      "https://aspen-backend-ca1ab990a9c5.herokuapp.com/auth/request-verify-token",
-      requestOptions
-    );
-    const data = await response.json();
+    try {
+      const response = await fetch(
+        "https://aspen-backend-ca1ab990a9c5.herokuapp.com/auth/request-verify-token",
+        requestOptions
+      );
 
-    if (!response.ok) {
-      setErrorMessage(data.detail);
-      console.log("oops, not working");
-    } else {
-      console.log("in the else block");
-      setToken(data.access_token);
-      console.log("woot woot");
+      if (!response.ok) {
+        const data = await response.json();
+        setErrorMessage(data.detail);
+        console.log("Oops, something went wrong:", data.detail);
+      } else {
+        const data = await response.json();
+        console.log("Data received:", data);
+        // Store the access token in local storage
+        localStorage.setItem("accessToken", data.access_token);
+        console.log("Access token stored in local storage");
+      }
+    } catch (error) {
+      console.error("Error occurred while fetching:", error);
+      setErrorMessage("An unexpected error occurred. Please try again later.");
     }
   };
 
