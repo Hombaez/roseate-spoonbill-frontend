@@ -7,7 +7,7 @@ const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [, setToken] = useContext(UserContext);
+  const [token, setToken] = useContext(UserContext);
 
   const submitLogin = async () => {
     const requestOptions = {
@@ -15,10 +15,9 @@ const Signin = () => {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: JSON.stringify({
-        username: email,
-        password: password,
-      }),
+      body: JSON.stringify(
+        `grant_type=&username=${email}&password=${password}&scope=&client_id=&client_secret=`
+      ),
     };
 
     try {
@@ -73,6 +72,15 @@ const Signin = () => {
         <ErrorMessage message={errorMessage} />
         <button type="submit">Log In</button>
       </form>
+      {token ? (
+        <div>
+          <h1>woo! logged in</h1>
+        </div>
+      ) : (
+        <div>
+          <h1>you are NOTTTTT logged in</h1>
+        </div>
+      )}
     </div>
   );
 };
