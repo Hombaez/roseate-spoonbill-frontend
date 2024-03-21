@@ -8,7 +8,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [, setToken] = useContext(UserContext);
+  const [token, setToken] = useContext(UserContext);
 
   const submitRegistration = async () => {
     const requestOptions = {
@@ -50,7 +50,7 @@ const Register = () => {
       console.log("It no working");
     } else {
       setToken(data.access_token);
-      console.log("IT WORKED");
+      console.log("IT WORKED", token);
     }
   };
 

@@ -29,10 +29,11 @@ const Signin = () => {
 
     if (!response.ok) {
       setErrorMessage(data.detail);
+      console.log("oops, not working");
     } else {
-      const data = await response.json();
-
+      console.log("in the else block");
       setToken(data.access_token);
+      console.log("woot woot");
     }
   };
 

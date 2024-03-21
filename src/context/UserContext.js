@@ -4,9 +4,15 @@ export const UserContext = createContext();
 
 export const UserProvider = (props) => {
   const [token, setToken] = useState(localStorage.getItem("hubToken"));
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
+      if (!token) {
+        setIsLoading(false);
+        return;
+      }
+
       const requestOptions = {
         method: "GET",
         headers: {
@@ -21,9 +27,16 @@ export const UserProvider = (props) => {
       );
 
       if (!response.ok) {
+        console.log("response is not okay");
         setToken(null);
+      } else {
+        const responseData = await response.json();
+        const newToken = responseData.token; // Assuming the token is returned from the server
+        setToken(newToken);
+        localStorage.setItem("hubToken", newToken);
+        console.log("token", newToken);
       }
-      localStorage.setItem("hubToken", token);
+      setIsLoading(false);
     };
     fetchUser();
   }, [token]);
