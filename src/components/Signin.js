@@ -1,4 +1,5 @@
-import { React, useState, useContext } from "react";
+import { React, useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import ErrorMessage from "./ErrorMessage";
 import { UserContext } from "../context/UserContext";
@@ -8,6 +9,8 @@ const Signin = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [token, setToken] = useContext(UserContext);
+
+  let navigate = useNavigate();
 
   const submitLogin = async () => {
     const requestOptions = {
@@ -36,6 +39,7 @@ const Signin = () => {
         // Store the access token in local storage
         localStorage.setItem("accessToken", data.access_token);
         console.log("Access token stored in local storage");
+        navigate("/home");
       }
     } catch (error) {
       console.error("Error occurred while fetching:", error);
