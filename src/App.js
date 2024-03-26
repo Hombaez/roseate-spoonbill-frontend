@@ -16,16 +16,18 @@ import Signin from "./components/Signin";
 
 import { isAuthenticated } from "./components/Utils/auth";
 
+//does not allow "secure" pages to be shown when logged in
 const PrivateRoute = ({ component: Component, ...rest }) => {
+  //checks from auth.js if user is authenticated
   const authenticated = isAuthenticated();
 
-  console.log("is authenticated?!", authenticated);
-
+  //if not authenticated, sends them to log in page
   if (!authenticated) {
     return <Navigate to="/login" replace />;
   }
 
   return (
+    //if authenticated, send them to home page
     <div>
       <Component />
     </div>
@@ -33,8 +35,13 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 };
 
 function App() {
+  //token is the JWT token
   const [token] = useContext(UserContext);
+
+  //locations helps to track the underline onthe nav bar
   const location = useLocation();
+
+  //help to track if user is logged in
   const loggedIn = isAuthenticated();
 
   return (
@@ -42,10 +49,12 @@ function App() {
       <nav>
         <ul>
           <div className="right_side">
+            {/* if they are logged in shows home page, conections, etc */}
             {loggedIn && (
               <>
                 <li>
                   <Link
+                    // if this link is clicked it will underline the title on nav bar
                     className={`links ${
                       location.pathname === "/home" ? "active" : ""
                     }`}
@@ -119,16 +128,6 @@ function App() {
         </ul>
       </nav>
 
-      {token ? (
-        <div>
-          <h1>woo! logged in</h1>
-        </div>
-      ) : (
-        <div>
-          <h1>you are NOTTTTT logged in</h1>
-        </div>
-      )}
-
       <Routes>
         <Route
           path="/login"
@@ -138,33 +137,19 @@ function App() {
             </>
           }
         />
-
+        {/* sets the endpoints for each componenet */}
         <Route path="/" element={<MainPage />} />
-        <Route
-          path="/home"
-          // element={<Home />}
-          element={<PrivateRoute component={Home} />}
-        />
-        <Route
-          path="/deals"
-          // element={<DealsTab />}
-          element={<PrivateRoute component={DealsTab} />}
-        />
+        <Route path="/home" element={<PrivateRoute component={Home} />} />
+        <Route path="/deals" element={<PrivateRoute component={DealsTab} />} />
         <Route
           path="/connections"
-          // element={<ConnectionTab />}
           element={<PrivateRoute component={ConnectionTab} />}
         />
         <Route
           path="/territory"
-          // element={<Territory />}
           element={<PrivateRoute component={Territory} />}
         />
-        <Route
-          path="/profile"
-          // element={<Profile />}
-          element={<PrivateRoute component={Profile} />}
-        />
+        <Route path="/profile" element={<PrivateRoute component={Profile} />} />
       </Routes>
     </div>
   );

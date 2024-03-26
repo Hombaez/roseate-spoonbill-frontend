@@ -5,13 +5,18 @@ import ErrorMessage from "./ErrorMessage";
 import { UserContext } from "../context/UserContext";
 
 const Signin = () => {
+  //stores email
   const [email, setEmail] = useState("");
+  //stores password
   const [password, setPassword] = useState("");
+  //error mesage not yet in use, will show if password doesnt meet criteria
   const [errorMessage, setErrorMessage] = useState("");
+  //token is JWT token for logging in
   const [token, setToken] = useContext(UserContext);
 
   let navigate = useNavigate();
 
+  //for loggin into the app
   const submitLogin = async () => {
     const requestOptions = {
       method: "POST",
@@ -38,7 +43,7 @@ const Signin = () => {
         console.log("Data received:", data);
         // Store the access token in local storage
         localStorage.setItem("accessToken", data.access_token);
-        console.log("Access token stored in local storage");
+        //naviagtes home after token is stored
         navigate("/home");
       }
     } catch (error) {
