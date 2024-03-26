@@ -110,6 +110,9 @@ function DealsTab() {
     //add code that opens up the specific person that was pressed on
   };
 
+  // ------------------------------------
+  //upload functions
+
   // Function to upload file to s3
   const uploadFile = async () => {
     //this checks if there was a file that was uploaded, if not and the buttonw as pressed it sends an alert saying no doc uploaded
@@ -165,6 +168,29 @@ function DealsTab() {
     // Changing file state
 
     setFile(file);
+  };
+
+  // ------------------------------------
+  //download
+  const handleDownload = async () => {
+    const url =
+      "https://d3jy31tj1gt845.cloudfront.net/reactdigitalgarden/json/menu.json";
+    const fileName = "menu.json";
+
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const downloadUrl = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement("a");
+      link.href = downloadUrl;
+      link.setAttribute("download", fileName);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(downloadUrl);
+    } catch (error) {
+      console.error("Error fetching the file:", error);
+    }
   };
 
   return (
@@ -290,9 +316,7 @@ function DealsTab() {
                             <input type="file" onChange={handleFileChange} />
                             <button onClick={uploadFile}>Upload</button>
                           </div>
-                          <GreyButton id="grey_button">
-                            Download Documents
-                          </GreyButton>
+                          <button onClick={handleDownload}>Download</button>
                         </div>
                         <p>Cal</p>
                       </div>
