@@ -11,7 +11,7 @@ function ConnectionsTab() {
             <h3>connections</h3>
           </div>
           <div className="connection_info">
-            {/* crate dummy data, use map for dummy data, add scroll feature */}
+            {/* create dummy data, use map for dummy data, add scroll feature */}
             <div className="date">
               <h4>date</h4>
               <h4>6-21-23</h4>
