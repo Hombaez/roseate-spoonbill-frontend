@@ -2,7 +2,7 @@ import "./DealsTab.css";
 
 import AWS from "aws-sdk";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import GreenButton from "./UI/buttons/GreenButton";
@@ -110,8 +110,9 @@ function DealsTab() {
     //add code that opens up the specific person that was pressed on
   };
 
-  // ------------------------------------
-  //upload functions
+  // ---------------------------------------------------------------------
+  // ------------ UPLOAD FUNCTIONS ---------------------------------------------
+  // ---------------------------------------------------------------------
 
   // Function to upload file to s3
   const uploadFile = async () => {
@@ -170,28 +171,37 @@ function DealsTab() {
     setFile(file);
   };
 
-  // ------------------------------------
-  //download
-  const handleDownload = async () => {
-    const url =
-      "https://d3jy31tj1gt845.cloudfront.net/reactdigitalgarden/json/menu.json";
-    const fileName = "menu.json";
+  // ---------------------------------------------------------------------
+  // ------------ DOWNLOAD FUNCTIONS -------------------------------------
+  // ---------------------------------------------------------------------
 
-    try {
-      const response = await fetch(url);
-      const blob = await response.blob();
-      const downloadUrl = window.URL.createObjectURL(new Blob([blob]));
-      const link = document.createElement("a");
-      link.href = downloadUrl;
-      link.setAttribute("download", fileName);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(downloadUrl);
-    } catch (error) {
-      console.error("Error fetching the file:", error);
-    }
-  };
+  const [documents, setDocuments] = useState([]);
+
+  useEffect(() => {
+    // AWS SDK Configuration
+    AWS.config.update({
+      accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+      region: process.env.REACT_APP_REGION,
+    });
+
+    const s3 = new AWS.S3();
+
+    const listDocuments = async () => {
+      const params = {
+        Bucket: process.env.REACT_APP_AWS_S3_BUCKET_NAME,
+      };
+
+      try {
+        const data = await s3.listObjectsV2(params).promise();
+        setDocuments(data.Contents); // Contains info about each object
+      } catch (error) {
+        console.error("Error listing S3 documents:", error);
+      }
+    };
+
+    listDocuments();
+  }, []);
 
   return (
     <div className="DealsTab">
@@ -312,11 +322,8 @@ function DealsTab() {
                           </select>
                         </form>
                         <div className="load_documents">
-                          <div>
-                            <input type="file" onChange={handleFileChange} />
-                            <button onClick={uploadFile}>Upload</button>
-                          </div>
-                          <button onClick={handleDownload}>Download</button>
+                          <input type="file" onChange={handleFileChange} />
+                          <button onClick={uploadFile}>Upload</button>
                         </div>
                         <p>Cal</p>
                       </div>
@@ -337,12 +344,16 @@ function DealsTab() {
                       className="documents_container"
                       style={{ verticalAlign: "top", display: "table-cell" }}
                     >
-                      {deal.documents.map((document, i) => (
+                      {documents.map((doc, index) => (
+                        <p key={index}>{doc.Key}</p>
+                      ))}
+
+                      {/* {deal.documents.map((document, i) => (
                         <div key={i} className="document_info">
                           <p>{document.title}</p>
-                          <p>see</p>
+                          <button>download</button>
                         </div>
-                      ))}
+                      ))} */}
                     </td>
                   </tr>
                 ))}
