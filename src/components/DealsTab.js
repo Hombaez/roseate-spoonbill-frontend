@@ -1,11 +1,16 @@
 import "./DealsTab.css";
 
-import React from "react";
+import AWS from "aws-sdk";
+
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import GreenButton from "./UI/buttons/GreenButton";
 import GreyButton from "./UI/buttons/GreyButton";
 
+// ---------------------------------------------------------------------
+// ------------ DUMMY DATA ---------------------------------------------
+// ---------------------------------------------------------------------
 const dealInfoDummyData = [
   {
     name1: "John",
@@ -82,14 +87,84 @@ const clientDummyData = [
     ],
   },
 ];
+// ---------------------------------------------------------------------
+// ------------ DUMMY DATA ---------------------------------------------
+// ---------------------------------------------------------------------
 
 function DealsTab() {
   const navigate = useNavigate();
 
+  const BUCKET_NAME = process.env.REACT_APP_AWS_S3_BUCKET_NAME;
+  const REGION_NAME = process.env.REACT_APP_REGION;
+  const SECRET_ACCESS_KEY = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
+  const ACCESS_KEY_ID = process.env.REACT_APP_AWS_ACCESS_KEY_ID;
+
+  //hold file data in state
+  const [file, setFile] = useState(null);
+
+  //function to send a message
   const sendMessage = () => {
     // Navigate to ConnectionsTab.js
     navigate("/connections");
     console.log("going to send message");
+    //add code that opens up the specific person that was pressed on
+  };
+
+  // Function to upload file to s3
+  const uploadFile = async () => {
+    //this checks if there was a file that was uploaded, if not and the buttonw as pressed it sends an alert saying no doc uploaded
+    if (!file) {
+      alert("No document has been selected");
+      return; // Early return to stop further execution
+    }
+
+    // S3 Bucket Name
+    const S3_BUCKET = BUCKET_NAME;
+    // S3 Region
+    const REGION = REGION_NAME;
+
+    // S3 Credentials
+    AWS.config.update({
+      accessKeyId: ACCESS_KEY_ID,
+      secretAccessKey: SECRET_ACCESS_KEY,
+    });
+    const s3 = new AWS.S3({
+      params: { Bucket: S3_BUCKET },
+      region: REGION,
+    });
+
+    // Files Parameters
+    const params = {
+      Bucket: S3_BUCKET,
+      Key: file.name,
+      Body: file,
+    };
+
+    // Uploading file to s3
+    var upload = s3
+      .putObject(params)
+      .on("httpUploadProgress", (evt) => {
+        console.log(
+          "Uploading " + parseInt((evt.loaded * 100) / evt.total) + "%"
+        );
+      })
+      .promise();
+
+    await upload.then((err, data) => {
+      console.log(err);
+      // File successfully uploaded
+      alert("File uploaded successfully.");
+    });
+  };
+
+  // Function to handle file and store it to file state
+  const handleFileChange = (e) => {
+    // Uploaded file
+
+    const file = e.target.files[0];
+    // Changing file state
+
+    setFile(file);
   };
 
   return (
@@ -211,9 +286,10 @@ function DealsTab() {
                           </select>
                         </form>
                         <div className="load_documents">
-                          <GreyButton id="grey_button">
-                            Upload Documents
-                          </GreyButton>
+                          <div>
+                            <input type="file" onChange={handleFileChange} />
+                            <button onClick={uploadFile}>Upload</button>
+                          </div>
                           <GreyButton id="grey_button">
                             Download Documents
                           </GreyButton>
