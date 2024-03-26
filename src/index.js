@@ -8,6 +8,7 @@ import { UserProvider } from "./context/UserContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  // userProvider helps track token with whole app
   <UserProvider>
     <BrowserRouter>
       <App />
