@@ -172,6 +172,17 @@ function DealsTab() {
   };
 
   // ---------------------------------------------------------------------
+  // ----------------- VIEW DOCUMENT -------------------------------------
+  // ---------------------------------------------------------------------
+
+  const handleDocumentClick = (documentKey) => {
+    // Construct the URL for the document
+    const encodedDocumentKey = encodeURIComponent(documentKey);
+    const url = `https://hombaez-dev.s3.amazonaws.com/${encodedDocumentKey}`;
+    window.open(url, "_blank");
+  };
+
+  // ---------------------------------------------------------------------
   // ------------ DOWNLOAD FUNCTIONS -------------------------------------
   // ---------------------------------------------------------------------
 
@@ -345,15 +356,14 @@ function DealsTab() {
                       style={{ verticalAlign: "top", display: "table-cell" }}
                     >
                       {documents.map((doc, index) => (
-                        <p key={index}>{doc.Key}</p>
+                        <p
+                          key={index}
+                          onClick={() => handleDocumentClick(doc.Key)}
+                          style={{ cursor: "pointer" }}
+                        >
+                          {doc.Key.split("/").pop()}{" "}
+                        </p>
                       ))}
-
-                      {/* {deal.documents.map((document, i) => (
-                        <div key={i} className="document_info">
-                          <p>{document.title}</p>
-                          <button>download</button>
-                        </div>
-                      ))} */}
                     </td>
                   </tr>
                 ))}
