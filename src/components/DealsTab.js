@@ -8,7 +8,8 @@ import { useNavigate } from "react-router-dom";
 import GreenButton from "./UI/buttons/GreenButton";
 import GreyButton from "./UI/buttons/GreyButton";
 
-import download from "../images/downloads_svg.png";
+import download from "../images/downloading_svg_circle.png";
+import view from "../images/eye_svg.png";
 
 // ---------------------------------------------------------------------
 // ------------ DUMMY DATA ---------------------------------------------
@@ -219,27 +220,28 @@ function DealsTab() {
 
   // This method generates a pre-signed URL and triggers the file download
   const handleDownloadClick = async (documentKey) => {
+    console.log("Attempting to download document with key:", documentKey);
+
     const s3 = new AWS.S3();
-    const params = {
-      Bucket: BUCKET_NAME,
-      Key: documentKey,
-      Expires: 60, // Expires in 60 seconds
-    };
 
-    s3.getSignedUrl("getObject", params, (err, url) => {
-      if (err) {
-        console.error(err);
-        return;
+    s3.getSignedUrl(
+      "getObject",
+      { Bucket: BUCKET_NAME, Key: documentKey, Expires: 60 },
+      (err, url) => {
+        if (err) {
+          console.error("Error getting signed URL:", err);
+          return;
+        }
+
+        // Create an anchor element and trigger the download
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = documentKey.split("/").pop(); // Suggests a filename for the downloaded file
+        document.body.appendChild(link); // Required for Firefox
+        link.click();
+        document.body.removeChild(link); // Clean up
       }
-
-      // Create an anchor element and trigger the download
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = documentKey.split("/").pop(); // Suggests a filename for the downloaded file
-      document.body.appendChild(link); // Required for Firefox
-      link.click();
-      document.body.removeChild(link); // Clean up
-    });
+    );
   };
   return (
     <div className="DealsTab">
@@ -382,25 +384,50 @@ function DealsTab() {
                       className="documents_container"
                       style={{ verticalAlign: "top", display: "table-cell" }}
                     >
+                      {/* -------- */}
                       {documents.map((doc, index) => (
-                        <>
-                          <p
+                        <div key={doc.Key}>
+                          {/* THIS CODE VVVIIIIEEEWWWS */}
+                          <div
                             key={index}
-                            onClick={() => handleDocumentClick(doc.Key)}
+                            onClick={(e) => {
+                              e.preventDefault(); // Prevents the default action of the event.
+                              e.stopPropagation(); // Prevents the event from bubbling up the DOM tree.
+                              handleDocumentClick(doc.Key); // Handles opening or navigating.
+                            }}
                             style={{ cursor: "pointer" }}
                           >
-                            {doc.Key.split("/").pop()}
-                          </p>
-                          <div>
+                            <p>{doc.Key.split("/").pop()}</p>
                             <img
-                              src={download}
-                              alt="click to download"
-                              onClick={() => handleDownloadClick(doc.Key)}
-                              style={{ width: "20px", height: "20px" }}
+                              src={view}
+                              alt="click to download icon"
+                              style={{
+                                width: "20px",
+                                height: "20px",
+                              }}
                             />
                           </div>
-                        </>
+                          <div>
+                            {/* THIS CODE DOWNNNNNLLLLOOOOAAADS */}
+                            <img
+                              src={download}
+                              alt="click to download icon"
+                              style={{
+                                width: "20px",
+                                height: "20px",
+                                cursor: "pointer",
+                              }}
+                              onClick={(e) => {
+                                e.preventDefault(); // Again, prevents the default action (useful if <img> is wrapped in <a>).
+                                e.stopPropagation(); // Stops the click from reaching any parent elements.
+                                handleDownloadClick(doc.Key); // Specifically handles the download.
+                              }}
+                            />
+                          </div>
+                        </div>
                       ))}
+
+                      {/* ----- */}
                     </td>
                   </tr>
                 ))}
