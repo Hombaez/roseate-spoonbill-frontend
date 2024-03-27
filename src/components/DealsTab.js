@@ -11,7 +11,7 @@ import GreyButton from "./UI/buttons/GreyButton";
 import download from "../images/downloading_svg_circle.png";
 import view from "../images/eye_svg.png";
 
-const userID = process.env.REACT_APP_USER_ONE;
+const userID_ONE = process.env.REACT_APP_USER_ONE;
 
 // ---------------------------------------------------------------------
 // ------------ DUMMY DATA ---------------------------------------------
@@ -148,7 +148,7 @@ function DealsTab() {
     // Files Parameters
     const params = {
       Bucket: S3_BUCKET,
-      Key: file.name,
+      Key: `${userID_ONE}/${file.name}`, // Prefix file name with userID_ONE
       Body: file,
     };
 
