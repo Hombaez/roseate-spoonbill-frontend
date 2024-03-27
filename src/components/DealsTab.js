@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import GreenButton from "./UI/buttons/GreenButton";
 import GreyButton from "./UI/buttons/GreyButton";
 
+import download from "../images/downloads_svg.png";
+
 // ---------------------------------------------------------------------
 // ------------ DUMMY DATA ---------------------------------------------
 // ---------------------------------------------------------------------
@@ -102,6 +104,9 @@ function DealsTab() {
   //hold file data in state
   const [file, setFile] = useState(null);
 
+  //holds documents user has downloaded
+  const [documents, setDocuments] = useState([]);
+
   //function to send a message
   const sendMessage = () => {
     // Navigate to ConnectionsTab.js
@@ -182,12 +187,6 @@ function DealsTab() {
     window.open(url, "_blank");
   };
 
-  // ---------------------------------------------------------------------
-  // ------------ DOWNLOAD FUNCTIONS -------------------------------------
-  // ---------------------------------------------------------------------
-
-  const [documents, setDocuments] = useState([]);
-
   useEffect(() => {
     // AWS SDK Configuration
     AWS.config.update({
@@ -214,6 +213,34 @@ function DealsTab() {
     listDocuments();
   }, []);
 
+  // ---------------------------------------------------------------------
+  // ------------ DOWNLOAD FUNCTIONS -------------------------------------
+  // ---------------------------------------------------------------------
+
+  // This method generates a pre-signed URL and triggers the file download
+  const handleDownloadClick = async (documentKey) => {
+    const s3 = new AWS.S3();
+    const params = {
+      Bucket: BUCKET_NAME,
+      Key: documentKey,
+      Expires: 60, // Expires in 60 seconds
+    };
+
+    s3.getSignedUrl("getObject", params, (err, url) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+
+      // Create an anchor element and trigger the download
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = documentKey.split("/").pop(); // Suggests a filename for the downloaded file
+      document.body.appendChild(link); // Required for Firefox
+      link.click();
+      document.body.removeChild(link); // Clean up
+    });
+  };
   return (
     <div className="DealsTab">
       <div className="DealsTab_Container">
@@ -356,13 +383,23 @@ function DealsTab() {
                       style={{ verticalAlign: "top", display: "table-cell" }}
                     >
                       {documents.map((doc, index) => (
-                        <p
-                          key={index}
-                          onClick={() => handleDocumentClick(doc.Key)}
-                          style={{ cursor: "pointer" }}
-                        >
-                          {doc.Key.split("/").pop()}{" "}
-                        </p>
+                        <>
+                          <p
+                            key={index}
+                            onClick={() => handleDocumentClick(doc.Key)}
+                            style={{ cursor: "pointer" }}
+                          >
+                            {doc.Key.split("/").pop()}
+                          </p>
+                          <div>
+                            <img
+                              src={download}
+                              alt="click to download"
+                              onClick={() => handleDownloadClick(doc.Key)}
+                              style={{ width: "20px", height: "20px" }}
+                            />
+                          </div>
+                        </>
                       ))}
                     </td>
                   </tr>
