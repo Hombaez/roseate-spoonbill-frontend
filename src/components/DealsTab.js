@@ -148,25 +148,19 @@ function DealsTab() {
     // Files Parameters
     const params = {
       Bucket: S3_BUCKET,
-      Key: `${userID_ONE}/${file.name}`, // Prefix file name with userID_ONE
+      Key: `user/${userID_ONE}/documents/${file.name}`,
       Body: file,
     };
 
     // Uploading file to s3
-    var upload = s3
-      .putObject(params)
-      .on("httpUploadProgress", (evt) => {
-        console.log(
-          "Uploading " + parseInt((evt.loaded * 100) / evt.total) + "%"
-        );
-      })
-      .promise();
-
-    await upload.then((err, data) => {
-      console.log(err);
-      // File successfully uploaded
+    try {
+      const data = await s3.putObject(params).promise();
+      console.log("Upload successful", data); // On success, log the response
       alert("File uploaded successfully.");
-    });
+    } catch (err) {
+      console.error("Upload failed", err); // On error, log the error
+      alert("Failed to upload file.");
+    }
   };
 
   // Function to handle file and store it to file state
