@@ -11,6 +11,8 @@ import GreyButton from "./UI/buttons/GreyButton";
 import download from "../images/downloading_svg_circle.png";
 import view from "../images/eye_svg.png";
 
+const userID = process.env.REACT_APP_USER_ONE;
+
 // ---------------------------------------------------------------------
 // ------------ DUMMY DATA ---------------------------------------------
 // ---------------------------------------------------------------------
@@ -178,7 +180,7 @@ function DealsTab() {
   };
 
   // ---------------------------------------------------------------------
-  // ----------------- VIEW DOCUMENT -------------------------------------
+  // ----------------- OPEN DOCUMENT -------------------------------------
   // ---------------------------------------------------------------------
 
   const handleDocumentClick = (documentKey) => {
@@ -187,6 +189,10 @@ function DealsTab() {
     const url = `https://hombaez-dev.s3.amazonaws.com/${encodedDocumentKey}`;
     window.open(url, "_blank");
   };
+
+  // ---------------------------------------------------------------------
+  // ----------------- VIEW DOCUMENT -------------------------------------
+  // ---------------------------------------------------------------------
 
   useEffect(() => {
     // AWS SDK Configuration
@@ -199,13 +205,15 @@ function DealsTab() {
     const s3 = new AWS.S3();
 
     const listDocuments = async () => {
+      const specificId = "6487406afa1871cfa6503db7";
       const params = {
         Bucket: process.env.REACT_APP_AWS_S3_BUCKET_NAME,
+        Prefix: `user/${specificId}/documents/`, // Only list objects within this "folder"
       };
 
       try {
         const data = await s3.listObjectsV2(params).promise();
-        setDocuments(data.Contents); // Contains info about each object
+        setDocuments(data.Contents); // Contains info about each object within the specific folder
       } catch (error) {
         console.error("Error listing S3 documents:", error);
       }
@@ -214,35 +222,6 @@ function DealsTab() {
     listDocuments();
   }, []);
 
-  // ---------------------------------------------------------------------
-  // ------------ DOWNLOAD FUNCTIONS -------------------------------------
-  // ---------------------------------------------------------------------
-
-  // This method generates a pre-signed URL and triggers the file download
-  const handleDownloadClick = async (documentKey) => {
-    console.log("Attempting to download document with key:", documentKey);
-
-    const s3 = new AWS.S3();
-
-    s3.getSignedUrl(
-      "getObject",
-      { Bucket: BUCKET_NAME, Key: documentKey, Expires: 60 },
-      (err, url) => {
-        if (err) {
-          console.error("Error getting signed URL:", err);
-          return;
-        }
-
-        // Create an anchor element and trigger the download
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = documentKey.split("/").pop(); // Suggests a filename for the downloaded file
-        document.body.appendChild(link); // Required for Firefox
-        link.click();
-        document.body.removeChild(link); // Clean up
-      }
-    );
-  };
   return (
     <div className="DealsTab">
       <div className="DealsTab_Container">
@@ -384,50 +363,27 @@ function DealsTab() {
                       className="documents_container"
                       style={{ verticalAlign: "top", display: "table-cell" }}
                     >
-                      {/* -------- */}
-                      {documents.map((doc, index) => (
-                        <div key={doc.Key}>
-                          {/* THIS CODE VVVIIIIEEEWWWS */}
-                          <div
-                            key={index}
-                            onClick={(e) => {
-                              e.preventDefault(); // Prevents the default action of the event.
-                              e.stopPropagation(); // Prevents the event from bubbling up the DOM tree.
-                              handleDocumentClick(doc.Key); // Handles opening or navigating.
-                            }}
-                            style={{ cursor: "pointer" }}
-                          >
-                            <p>{doc.Key.split("/").pop()}</p>
-                            <img
-                              src={view}
-                              alt="click to download icon"
-                              style={{
-                                width: "20px",
-                                height: "20px",
-                              }}
-                            />
-                          </div>
+                      {/* --------------------------------------------------------------------------- */}
+                      <div>
+                        {documents.length > 0 ? (
                           <div>
-                            {/* THIS CODE DOWNNNNNLLLLOOOOAAADS */}
-                            <img
-                              src={download}
-                              alt="click to download icon"
-                              style={{
-                                width: "20px",
-                                height: "20px",
-                                cursor: "pointer",
-                              }}
-                              onClick={(e) => {
-                                e.preventDefault(); // Again, prevents the default action (useful if <img> is wrapped in <a>).
-                                e.stopPropagation(); // Stops the click from reaching any parent elements.
-                                handleDownloadClick(doc.Key); // Specifically handles the download.
-                              }}
-                            />
+                            {documents.map((doc, index) => (
+                              <p key={index}>
+                                <button
+                                  onClick={() => handleDocumentClick(doc.Key)}
+                                >
+                                  VIEW
+                                </button>
+                                {/* Extracting the filename from the document key */}
+                                {doc.Key.split("/").pop()}
+                              </p>
+                            ))}
                           </div>
-                        </div>
-                      ))}
-
-                      {/* ----- */}
+                        ) : (
+                          <p>No documents found.</p>
+                        )}
+                      </div>
+                      {/* --------------------------------------------------------------------------- */}
                     </td>
                   </tr>
                 ))}
