@@ -3,9 +3,8 @@ import "./Home.css";
 import React, { useState, useEffect } from "react";
 import { gapi } from "gapi-script";
 
-const CLIENT_ID =
-  "270050881815-hqtm2mrapfmlgob4djfj4r7qjvh3lsd2.apps.googleusercontent.com";
-const API_KEY = "AIzaSyDVkH8LABTfFL_Vij73xpb1lDSjMwQCp8M";
+const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 const DISCOVERY_DOC =
   "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest";
 const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
