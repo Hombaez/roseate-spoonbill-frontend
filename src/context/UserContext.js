@@ -1,12 +1,14 @@
 import { React, createContext, useState, useEffect } from "react";
+import { gapi } from "gapi-script";
 
 export const UserContext = createContext();
 
 export const UserProvider = (props) => {
-  //token initally set as null
+  //JWT token initally set as null
   const [token, setToken] = useState(null);
 
   useEffect(() => {
+    //this is for JWT token
     //gets token from local storage and stores it
     const storedToken = localStorage.getItem("accessToken");
     if (storedToken) {
