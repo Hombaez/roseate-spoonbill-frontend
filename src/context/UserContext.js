@@ -1,5 +1,4 @@
 import { React, createContext, useState, useEffect } from "react";
-import { gapi } from "gapi-script";
 
 export const UserContext = createContext();
 
